@@ -1,8 +1,11 @@
 require 'tk'
+require "active_support"
+require 'figleaf'
 require 'require_all'
 
-require_rel 'gui'
 require_rel 'app/lib'
+require_rel 'gui'
+require_rel 'api'
 
 class Pompom
   attr_accessor :gui, :log_reader, :log_parser
@@ -13,9 +16,6 @@ class Pompom
     self.gui = Gui.new
     self.log_reader = LogReader.new
     self.log_parser = Parser::LogParser.new
-
-    puts parse_log("2010/15 09:10:33 2977154 287 [INFO Client 2168] $hsdis: WTB Orb of Alchemy , paying _ 1 : 2.5")
-    puts parse_log("2015/10/15 09:10:33 2977154 287 [INFO Client 2168] $hsdis: WTB Orb of Alchemy , paying _ 1 : 2.5")
   end
 
   def start
@@ -30,7 +30,7 @@ class Pompom
   end
 
   def read_logs
-    puts "debug: reading logs..."
+    puts "debug: READING logs..."
 
     log_reader.each_valid_line { |log| parse_log(log) }
 
@@ -38,8 +38,9 @@ class Pompom
   end
 
   def parse_log(log)
-    puts "debug: reading logs..."
-    log_parser.parse(log)
+    puts "debug: PARSING logs... #{log}"
+
+    API.logs log_parser.parse(log)
   end
 
   def loop_delay
@@ -48,5 +49,5 @@ class Pompom
 end
 
 pompom = Pompom.new
-# pompom.start
+pompom.start
 

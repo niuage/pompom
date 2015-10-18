@@ -1,11 +1,11 @@
-require 'active_support/core_ext/module/delegation'
-
 class LogReader
   attr_accessor :log_file
 
+  delegate :characters, :log_file, to: :Settings, prefix: "settings"
+
   def initialize
-    self.log_file = File.open("/Users/robinboutros/Client.txt", "r")
-    move_cursor_to_end_of_file
+    self.log_file = File.open(settings_log_file.path, "r")
+    # move_to_end_of_file
   end
 
   def each_valid_line
@@ -17,10 +17,10 @@ class LogReader
   private
 
   def valid_log?(log)
-    ["RikAndMorty"].any? { |character_name| log.include?("##{character_name}:") }
+    settings_characters.any? { |character_name| log =~ /(#|\$)?#{character_name}:/ }
   end
 
-  def move_cursor_to_end_of_file
+  def move_to_end_of_file
     log_file.seek(0, IO::SEEK_END)
   end
 end

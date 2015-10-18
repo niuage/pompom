@@ -14,5 +14,6 @@ module Parser::Rules::Misc
     rule(:number)   { digit.repeat }
     rule(:hexa) { match["0-9a-fA-F"].repeat }
     rule(:anything) { match("[^\n]").repeat(1) }
+    rule(:anything?) { match("[^\n]").repeat(0) }
   end
 end

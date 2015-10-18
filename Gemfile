@@ -11,3 +11,8 @@ gem 'require_all'
 # Gives access to the user clipboard
 gem 'ffi' # windows support
 gem 'clipboard', '~> 1.0.6'
+
+# Handle settings files
+gem "figleaf"
+
+gem 'httparty'

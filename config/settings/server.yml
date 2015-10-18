@@ -1,0 +1,10 @@
+default: &default
+  logs_path: "/logs"
+
+production:
+  <<: *default
+  base_uri: http://pathofmaps.herokuapp.com
+
+development:
+  <<: *default
+  base_uri: http://localhost:5000
