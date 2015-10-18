@@ -2,4 +2,4 @@ production:
   path: "C:/Program Files/Grinding Gear Games/Path of Exile/logs/Client.txt"
 
 development:
-  path: "/Users/robinboutros/Documents/Client2.txt"
+  path: "/Users/robinboutros/localhost/pompom/logs/Client.txt"

@@ -1,0 +1,9 @@
+2015/10/15 20:44:05 2604265 287 [INFO Client 3304] #RikAndMorty: ms:
+2015/10/15 20:44:05 2604265 287 [INFO Client 3304] #RikAndMorty: ms: q20 name one
+2015/10/15 20:44:05 2604265 287 [INFO Client 3304] #RikAndMorty: ms: q 20 name two
+2015/10/15 20:44:05 2604265 287 [INFO Client 3304] #RikAndMorty: ms: l 80 t7
+2015/10/15 20:44:05 2604265 287 [INFO Client 3304] #RikAndMorty: ms: name je suis un nom de map t20
+2015/10/15 20:44:05 2604265 287 [INFO Client 3304] #RikAndMorty: ms: name je suis un nom de mapt20
+2015/10/15 20:44:05 2604265 287 [INFO Client 3304] #RikAndMorty: ms: t 7
+2015/10/15 20:44:05 2604265 287 [INFO Client 3304] #RikAndMorty: medit: name hahaha!
+

@@ -9,7 +9,7 @@ class Parser::LogParser < Parslet::Parser
   rule(:debug_client_id) { str("[DEBUG Client ") >> number >> str("]") >> space? }
 
   rule(:channel?) { (str("#") | str("$")).maybe }
-  rule(:user_prompt) { channel? >> match["^:"].repeat(1).as(:character) >> str(":") >> space? }
+  rule(:character_prompt) { channel? >> match["^:"].repeat(1).as(:character_name) >> str(":") >> space? }
 
   rule(:map_name) { (match["a-zA-Z\s"] >> start_options.absent?).repeat(1) }
 
@@ -31,7 +31,7 @@ class Parser::LogParser < Parslet::Parser
   rule(:map_drop) { str("md:") }
   rule(:map_abort) { str("ma:") }
   rule(:map_note) { str("mn:") }
-  rule(:map_edit) { str("medit:") }
+  rule(:map_edit) { str("medit:") >> (space? >> start_options).repeat(1) }
 
   rule(:command) do
     map_start.as(:map_start) |
@@ -43,7 +43,8 @@ class Parser::LogParser < Parslet::Parser
   end
 
   rule(:chat_log) do
-    meta_info >> user_prompt >> space? >> ((command >> anything?) | anything)
+    meta_info >> character_prompt >> space? >>
+    ((command.as(:command) >> anything?) | anything)
   end
 
   rule(:log) do
