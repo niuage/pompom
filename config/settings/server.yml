@@ -1,5 +1,5 @@
 default: &default
-  logs_path: "/logs"
+  logs_path: "/logs.json"
 
 production:
   <<: *default
