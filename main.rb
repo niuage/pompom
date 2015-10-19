@@ -1,7 +1,9 @@
 require 'tk'
 require "active_support"
 require 'figleaf'
+require 'clipboard'
 require 'require_all'
+require "base64"
 
 require_rel 'app/lib'
 require_rel 'gui'
@@ -40,7 +42,30 @@ class Pompom
   def parse_log(log)
     puts "debug: PARSING logs... #{log}"
 
-    API.logs log_parser.parse(log)
+    parsed_logs = log_parser.parse(log)
+    puts "parsed: #{parsed_logs}"
+    map = map(parsed_logs)
+
+    # todo: test what happens with logs that cant be parsed
+    API.log(
+      log: parsed_logs,
+      map: (Base64.encode64(map) if map.present?)
+    )
+  end
+
+  def map(log)
+    return "" unless send_map?(log)
+
+    cp_content = Clipboard.paste # Get map from clipboard
+    puts cp_content
+
+    return "" unless cp_content.include? "Travel to this Map"
+    cp_content
+  end
+
+  def send_map?(log)
+    return false unless log[:command]
+    !!log[:command][:map_start]
   end
 
   def loop_delay

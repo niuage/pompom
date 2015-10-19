@@ -7,12 +7,11 @@ class API
   def initialize
   end
 
-  def self.logs(data)
+  def self.log(data)
     post(Settings.server.logs_path, post_options(data))
   end
 
   def self.post_options(data)
-    puts data.to_json
     {
       body: data.to_json,
       headers: { 'Content-Type' => 'application/json' }

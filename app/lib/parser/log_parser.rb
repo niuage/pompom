@@ -9,19 +9,17 @@ class Parser::LogParser < Parslet::Parser
   rule(:debug_client_id) { str("[DEBUG Client ") >> number >> str("]") >> space? }
 
   rule(:channel?) { (str("#") | str("$")).maybe }
-  rule(:character_prompt) { channel? >> match["^:"].repeat(1).as(:character_name) >> str(":") >> space? }
+  rule(:character_prompt) { channel? >> match["^:"].repeat(1).as(:character) >> str(":") >> space? }
 
   rule(:map_name) { (match["a-zA-Z\s"] >> start_options.absent?).repeat(1) }
 
-  # 2 choices:
-  # - have the same names as the DB fields here, and then use subtree(:params)
-  # in the Transform class
-  # - add .maybe everywhere, so that the options always show up, and I can be
-  # specific in the Transform class
   rule(:start_options) do
-    (str("q") >> space? >> number.as(:item_quantity)) |
-    (str("ps") >> space? >> number.as(:pack_size)) |
-    (str("t") >> space? >> number.as(:tier)) |
+    (str("iq") >> space? >> number.as(:item_quantity)) |
+    (str("q") >> space? >> number.as(:quality)) |
+    (str("ir") >> space? >> number.as(:item_rarity)) |
+    (str("ps") >> space? >> number.as(:monster_pack_size)) |
+    (str("mt") >> space? >> number.as(:map_tier)) |
+    (str("ilvl") >> space? >> number.as(:item_level)) |
     (str("name") >> space? >> map_name.as(:name))
   end
 
@@ -43,7 +41,7 @@ class Parser::LogParser < Parslet::Parser
   end
 
   rule(:chat_log) do
-    meta_info >> character_prompt >> space? >>
+    meta_info >> character_prompt.as(:prompt) >> space? >>
     ((command.as(:command) >> anything?) | anything)
   end
 
