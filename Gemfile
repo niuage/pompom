@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'activesupport', '~> 4.2.4'
+# gem 'activesupport', '~> 4.2.4'
 
 # Used to parse logs
 gem 'parslet'
@@ -13,6 +13,11 @@ gem 'ffi' # windows support
 gem 'clipboard', '~> 1.0.6'
 
 # Handle settings files
-gem "figleaf"
+# gem "figleaf"
 
 gem 'httparty'
+
+
+group :development do
+  gem 'releasy'
+end

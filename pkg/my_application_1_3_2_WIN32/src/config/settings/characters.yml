@@ -1,0 +1,5 @@
+production:
+  - RikAndMorty
+
+development:
+  - RikAndMorty
