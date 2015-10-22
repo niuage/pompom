@@ -5,7 +5,7 @@ require 'clipboard'
 require 'require_all'
 require "base64"
 
-require_rel 'lib'
+require_rel '../lib'
 
 class Pompom
   attr_accessor :gui, :log_reader, :log_parser
