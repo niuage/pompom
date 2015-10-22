@@ -19,5 +19,5 @@ gem 'httparty'
 
 
 group :development do
-  gem 'releasy'
+  # gem 'releasy'
 end
