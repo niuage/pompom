@@ -1,4 +1,4 @@
-require 'tk'
+# require 'tk'
 require "active_support"
 require 'figleaf'
 require 'clipboard'
@@ -13,20 +13,22 @@ class Pompom
   LOOP_DELAY = 1000
 
   def initialize
-    self.gui = Gui.new
+    # self.gui = Gui.new
     self.log_reader = LogReader.new
     self.log_parser = Parser::LogParser.new
   end
 
   def start
     schedule_read_logs
-    Tk.mainloop
+    # Tk.mainloop
   end
 
   private
 
   def schedule_read_logs
-    gui.after(loop_delay) { read_logs }
+    sleep(LOOP_DELAY / 1000)
+    read_logs
+    # gui.after(loop_delay) { read_logs }
   end
 
   def read_logs
