@@ -1,3 +1,0 @@
-module Parser::Rules
-
-end
